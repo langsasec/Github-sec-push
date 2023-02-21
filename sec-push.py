@@ -74,8 +74,8 @@ if __name__ == '__main__':
                "网络安全", "主机安全", "信息收集", "溯源", "工控安全", "Industrial Control Safety", "云安全", "安全加固", "基线核查", "漏洞挖掘",
                "edusrc", "等级保护"]
     # API token
-    token1 = "5e95b2466349c7846ce70287fc62fb85"
-    token2 = "d77f4923096765d345bfc2fc135e137b"
+    token1 = ""
+    token2 = ""
     while True:
         # 定时早晨时间9:59:59
         h1 = '9'
@@ -92,7 +92,7 @@ if __name__ == '__main__':
         if time_now_h == h1 and time_now_m == m1 and time_now_s == s1:  # 早晨
             print('推送时间到了')
             # 随机选择关键字推送
-            random_msg = get_info(keyword[random.randrange(0, len(keyword))])
+            random_msg = get_info([keyword[random.randrange(0, len(keyword))]])
             push("txt=" + random_msg, token1)
             # 推送cve2022
             cve_msg = get_info(["CVE-2022"])
@@ -104,7 +104,7 @@ if __name__ == '__main__':
         if time_now_h == h2 and time_now_m == m2 and time_now_s == s2:  # 夜晚
             print('推送时间到了')
             # 随机选择关键字推送
-            random_msg = get_info(keyword[random.randrange(0, len(keyword))])
+            random_msg = get_info([keyword[random.randrange(0, len(keyword))]])
             push("txt=" + random_msg, token1)
             # 推送cve2023
             cve_msg = get_info(["CVE-2023"])
