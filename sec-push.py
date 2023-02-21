@@ -27,6 +27,16 @@ def get_info(key):
             # 推送30条
             if results.__len__() > 30:
                 break
+    # 过滤项目
+    black_list = ["反中共", "大陆修宪"]
+    n_results = []
+    for item in results:
+        if black_list[0] in str(item.values()):
+            continue
+        elif black_list[1] in str(item.values()):
+            continue
+        else:
+            n_results.append(item)
     message = ''
     for i in results:
         if i["项目描述"] is None:
@@ -67,15 +77,15 @@ def push(message, token):
 
 
 if __name__ == '__main__':
-    keyword = ["CVE-2022", "CVE-2023", "渗透测试", "信息安全", "免杀", "Bypass Antivirus", "Exploit", "Hackone", "钓鱼", "社会工程学",
+    keyword = ["CVE-2022", "CVE-2023", "渗透测试", "信息安全", "免杀", "域渗透", "Bypass Antivirus", "Exploit", "Hackone", "钓鱼", "社会工程学",
                "社工", "提权", "SQL注入", "POC", "蜜罐", "HVV", "白帽", "APT","代码审计",
                "漏洞利用", "红队", "Red Team", "蓝队", "Blue Team", "红蓝对抗", "CTF", "计算机取证", "密码学", "Computer Forensics",
                "应急响应", "Emergency response", "Penetration", "Pentest", "内网渗透", "网络攻防",
                "网络安全", "主机安全", "信息收集", "溯源", "工控安全", "Industrial Control Safety", "云安全", "安全加固", "基线核查", "漏洞挖掘",
                "edusrc", "等级保护"]
     # API token
-    token1 = ""
-    token2 = ""
+    token1 = "93e164164158ba25afb3542dbc143843"
+    token2 = "f9028396f26691e791459f3b7720916e"
     while True:
         # 定时早晨时间9:59:59
         h1 = '9'
