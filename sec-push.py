@@ -14,19 +14,18 @@ import requests
 # 获取github信息,注意key为数组
 def get_info(key):
     results = []
-    for i in key:
-        req = f"https://api.github.com/search/repositories?q={i}&sort=updated"
-        res = requests.get(req).content.decode("utf-8")
-        dict_data = json.loads(res)  # json转成python字典
-        time.sleep(5)  # 请求延迟
-        for j in dict_data['items']:
-            name = j['name']  # 获取到仓库名
-            html_url = j['html_url']  # 获取到仓库链接
-            desc = j['description']  # 获取到仓库描述
-            results.append({"项目名称": name, "项目地址": html_url, "项目描述": desc})
-            # 推送30条
-            if results.__len__() > 30:
-                break
+    req = f"https://api.github.com/search/repositories?q={key}&sort=updated"
+    res = requests.get(req).content.decode("utf-8")
+    dict_data = json.loads(res)  # json转成python字典
+    time.sleep(5)  # 请求延迟
+    for j in dict_data['items']:
+        name = j['name']  # 获取到仓库名
+        html_url = j['html_url']  # 获取到仓库链接
+        desc = j['description']  # 获取到仓库描述
+        results.append({"项目名称": name, "项目地址": html_url, "项目描述": desc})
+        # 推送30条
+        if results.__len__() > 30:
+            break
     # 过滤项目
     black_list = ["反中共", "大陆修宪"]
     n_results = []
@@ -84,17 +83,17 @@ if __name__ == '__main__':
                "网络安全", "主机安全", "信息收集", "溯源", "工控安全", "Industrial Control Safety", "云安全", "安全加固", "基线核查", "漏洞挖掘",
                "edusrc", "等级保护"]
     # API token
-    token1 = "93e164164158ba25afb3542dbc143843"
-    token2 = "f9028396f26691e791459f3b7720916e"
+    token1 = ""
+    token2 = ""
     while True:
         # 定时早晨时间9:59:59
         h1 = '9'
         m1 = '59'
         s1 = '59'
         # 定时夜晚时间 19:59:59
-        h2 = '19'
-        m2 = '59'
-        s2 = '59'
+        h2 = '17'
+        m2 = '14'
+        s2 = '30'
         # 获取当前时间
         time_now_h = time.strftime("%H", time.localtime())
         time_now_m = time.strftime("%M", time.localtime())
@@ -102,7 +101,7 @@ if __name__ == '__main__':
         if time_now_h == h1 and time_now_m == m1 and time_now_s == s1:  # 早晨
             print('推送时间到了')
             # 随机选择关键字推送
-            random_msg = get_info([keyword[random.randrange(0, len(keyword))]])
+            random_msg = get_info(keyword[random.randrange(0, len(keyword))])
             push("txt=" + random_msg, token1)
             # 推送cve2022
             cve_msg = get_info(["CVE-2022"])
@@ -114,7 +113,7 @@ if __name__ == '__main__':
         if time_now_h == h2 and time_now_m == m2 and time_now_s == s2:  # 夜晚
             print('推送时间到了')
             # 随机选择关键字推送
-            random_msg = get_info([keyword[random.randrange(0, len(keyword))]])
+            random_msg = get_info(keyword[random.randrange(0, len(keyword))])
             push("txt=" + random_msg, token1)
             # 推送cve2023
             cve_msg = get_info(["CVE-2023"])
