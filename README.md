@@ -9,7 +9,7 @@
 ### 随机安全推送关键字如下：
 
 ```python
-keyword=["CVE-2022","CVE-2023","渗透测试","信息安全","免杀","BypassAntivirus","Exploit","Hackone","钓鱼","社会工程学","社工","提权","SQL注入","POC","蜜罐","HVV","白帽","APT","漏洞利用","红队","RedTeam","蓝队","BlueTeam","红蓝对抗","CTF","计算机取证","密码学","ComputerForensics","应急响应","Emergencyresponse","Penetration","Pentest","内网渗透","网络攻防","网络安全","主机安全","信息收集","溯源","工控安全","IndustrialControlSafety","云安全","安全加固","基线核查","漏洞挖掘","edusrc","等级保护"]
+keyword=["CVE-2022","CVE-2023","渗透测试","信息安全","免杀","域渗透","BypassAntivirus","Exploit","Hackone","钓鱼","社会工程学","社工","提权","SQL注入","POC","蜜罐","HVV","白帽","APT","漏洞利用","红队","RedTeam","蓝队","BlueTeam","红蓝对抗","CTF","计算机取证","密码学","ComputerForensics","应急响应","Emergencyresponse","Penetration","Pentest","内网渗透","网络攻防","网络安全","主机安全","信息收集","溯源","工控安全","IndustrialControlSafety","云安全","安全加固","基线核查","漏洞挖掘","edusrc","等级保护"]
 ```
 
 *随机关键字推送可能有一定的**不准确性***
