@@ -40,9 +40,11 @@ def get_info(key):
     for i in results:
         if i["项目描述"] is None:
             result = "【项目名称】:" + str(i["项目名称"]) + "\\n" + "【项目地址】:" + str(i["项目地址"]) + "\\n\\n"
-        else:
+        elif len(i["项目描述"])>50:
             result = "【项目名称】:" + str(i["项目名称"]) + "\\n" + "【项目地址】:" + str(i["项目地址"]) + "\\n" + "【项目描述】:" + i[
-                "项目描述"] + "\\n\\n"
+                "项目描述"][:50] + "\\n\\n"
+        else:
+            result = "【项目名称】:" + str(i["项目名称"]) + "\\n" + "【项目地址】:" + str(i["项目地址"]) + "\\n" + "【项目描述】:" + i["项目描述"] + "\\n\\n"
         message = message + result
     return quote(message)  # url编码
 
@@ -91,9 +93,9 @@ if __name__ == '__main__':
         m1 = '59'
         s1 = '59'
         # 定时夜晚时间 19:59:59
-        h2 = '17'
-        m2 = '14'
-        s2 = '30'
+        h2 = '19'
+        m2 = '59'
+        s2 = '59'
         # 获取当前时间
         time_now_h = time.strftime("%H", time.localtime())
         time_now_m = time.strftime("%M", time.localtime())
