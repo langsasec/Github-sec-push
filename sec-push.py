@@ -118,7 +118,7 @@ if __name__ == '__main__':
     while True:
         # 定时早晨时间9:59:59
         h1 = 10
-        m1 = 15
+        m1 = 0
         s1 = 0
         # 定时夜晚时间 19:59:59
         h2 = 20
@@ -153,7 +153,9 @@ if __name__ == '__main__':
             push("txt=" + quote(random_msg[1]), token1)
             # 推送cve2023
             cve_msg = get_info(["CVE-2023"])
-            push("txt=" + cve_msg, token2)
+            push("txt=" + quote(cve_msg[0]), token2)
+            time.sleep(2)
+            push("txt=" + quote(cve_msg[1]), token2)
             # 打印推送时间
             info = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + " 夜晚定时发送推送成功"
             print(info)
