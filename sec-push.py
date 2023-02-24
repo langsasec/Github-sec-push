@@ -24,7 +24,11 @@ def get_info(key):
         desc = j['description']  # 获取到仓库描述
         results.append({"项目名称": name, "项目地址": html_url, "项目描述": desc})
         # 推送30条
+<<<<<<< HEAD
         if results.__len__() > 30:
+=======
+        if results.__len__() > 20:
+>>>>>>> 25e477b (修改为每次20条，分两次发)
             break
     # 过滤项目
     black_list = ["反中共", "大陆修宪"]
@@ -36,17 +40,35 @@ def get_info(key):
             continue
         else:
             n_results.append(item)
+<<<<<<< HEAD
+=======
+    results = n_results
+>>>>>>> 25e477b (修改为每次20条，分两次发)
     message = ''
+    message1 = ''
+    flag = 0
     for i in results:
         if i["项目描述"] is None:
             result = "【项目名称】:" + str(i["项目名称"]) + "\\n" + "【项目地址】:" + str(i["项目地址"]) + "\\n\\n"
+<<<<<<< HEAD
         elif len(i["项目描述"])>50:
+=======
+        elif len(i["项目描述"]) > 50:
+            result = "【项目名称】:" + str(i["项目名称"]) + "\\n" + "【项目地址】:" + str(i["项目地址"]) + "\\n" + "【项目描述】:" + i[
+                                                                                                               "项目描述"][
+                                                                                                           :50] + "\\n\\n"
+        else:
+>>>>>>> 25e477b (修改为每次20条，分两次发)
             result = "【项目名称】:" + str(i["项目名称"]) + "\\n" + "【项目地址】:" + str(i["项目地址"]) + "\\n" + "【项目描述】:" + i[
                 "项目描述"][:50] + "\\n\\n"
         else:
             result = "【项目名称】:" + str(i["项目名称"]) + "\\n" + "【项目地址】:" + str(i["项目地址"]) + "\\n" + "【项目描述】:" + i["项目描述"] + "\\n\\n"
         message = message + result
-    return quote(message)  # url编码
+        flag = flag + 1
+        if flag > 10:
+            message1 = message1 + result
+    msg = [message, message1]
+    return msg
 
 
 # API推送
@@ -78,8 +100,14 @@ def push(message, token):
 
 
 if __name__ == '__main__':
+<<<<<<< HEAD
     keyword = ["CVE-2022", "CVE-2023", "渗透测试", "信息安全", "免杀", "域渗透", "Bypass Antivirus", "Exploit", "Hackone", "钓鱼", "社会工程学",
                "社工", "提权", "SQL注入", "POC", "蜜罐", "HVV", "白帽", "APT","代码审计",
+=======
+    keyword = ["CVE-2022", "CVE-2023", "渗透测试", "信息安全", "免杀", "域渗透", "Bypass Antivirus", "Exploit", "Hackone", "钓鱼",
+               "社会工程学",
+               "社工", "提权", "SQL注入", "POC", "蜜罐", "HVV", "白帽", "APT", "代码审计",
+>>>>>>> 25e477b (修改为每次20条，分两次发)
                "漏洞利用", "红队", "Red Team", "蓝队", "Blue Team", "红蓝对抗", "CTF", "计算机取证", "密码学", "Computer Forensics",
                "应急响应", "Emergency response", "Penetration", "Pentest", "内网渗透", "网络攻防",
                "网络安全", "主机安全", "信息收集", "溯源", "工控安全", "Industrial Control Safety", "云安全", "安全加固", "基线核查", "漏洞挖掘",
@@ -89,34 +117,40 @@ if __name__ == '__main__':
     token2 = ""
     while True:
         # 定时早晨时间9:59:59
-        h1 = '9'
-        m1 = '59'
-        s1 = '59'
+        h1 = 10
+        m1 = 15
+        s1 = 0
         # 定时夜晚时间 19:59:59
-        h2 = '19'
-        m2 = '59'
-        s2 = '59'
+        h2 = 20
+        m2 = 0
+        s2 = 0
         # 获取当前时间
-        time_now_h = time.strftime("%H", time.localtime())
-        time_now_m = time.strftime("%M", time.localtime())
-        time_now_s = time.strftime("%S", time.localtime())
-        if time_now_h == h1 and time_now_m == m1 and time_now_s == s1:  # 早晨
+        time_now_h = time.localtime()[3]
+        time_now_m = time.localtime()[4]
+        time_now_s = time.localtime()[5]
+        if time_now_h == h1 and time_now_m == m1 and time_now_s >= s1:  # 早晨
             print('推送时间到了')
             # 随机选择关键字推送
             random_msg = get_info(keyword[random.randrange(0, len(keyword))])
-            push("txt=" + random_msg, token1)
+            push("txt=" + quote(random_msg[0]), token1)
+            time.sleep(2)
+            push("txt=" + quote(random_msg[1]), token1)
             # 推送cve2022
             cve_msg = get_info(["CVE-2022"])
-            push("txt=" + cve_msg, token2)
+            push("txt=" + quote(cve_msg[0]), token2)
+            time.sleep(2)
+            push("txt=" + quote(cve_msg[1]), token2)
             # 打印推送时间
             info = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + " 早晨定时发送推送成功"
             print(info)
             time.sleep(60)  # 防止1秒内执行多次
-        if time_now_h == h2 and time_now_m == m2 and time_now_s == s2:  # 夜晚
+        if time_now_h == h2 and time_now_m == m2 and time_now_s >= s2:  # 夜晚
             print('推送时间到了')
             # 随机选择关键字推送
             random_msg = get_info(keyword[random.randrange(0, len(keyword))])
-            push("txt=" + random_msg, token1)
+            push("txt=" + quote(random_msg[0]), token1)
+            time.sleep(2)
+            push("txt=" + quote(random_msg[1]), token1)
             # 推送cve2023
             cve_msg = get_info(["CVE-2023"])
             push("txt=" + cve_msg, token2)
