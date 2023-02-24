@@ -23,12 +23,8 @@ def get_info(key):
         html_url = j['html_url']  # 获取到仓库链接
         desc = j['description']  # 获取到仓库描述
         results.append({"项目名称": name, "项目地址": html_url, "项目描述": desc})
-        # 推送30条
-<<<<<<< HEAD
-        if results.__len__() > 30:
-=======
+        # 推送20条
         if results.__len__() > 20:
->>>>>>> 25e477b (修改为每次20条，分两次发)
             break
     # 过滤项目
     black_list = ["反中共", "大陆修宪"]
@@ -40,33 +36,23 @@ def get_info(key):
             continue
         else:
             n_results.append(item)
-<<<<<<< HEAD
-=======
     results = n_results
->>>>>>> 25e477b (修改为每次20条，分两次发)
     message = ''
     message1 = ''
     flag = 0
     for i in results:
         if i["项目描述"] is None:
             result = "【项目名称】:" + str(i["项目名称"]) + "\\n" + "【项目地址】:" + str(i["项目地址"]) + "\\n\\n"
-<<<<<<< HEAD
-        elif len(i["项目描述"])>50:
-=======
         elif len(i["项目描述"]) > 50:
-            result = "【项目名称】:" + str(i["项目名称"]) + "\\n" + "【项目地址】:" + str(i["项目地址"]) + "\\n" + "【项目描述】:" + i[
-                                                                                                               "项目描述"][
-                                                                                                           :50] + "\\n\\n"
-        else:
->>>>>>> 25e477b (修改为每次20条，分两次发)
-            result = "【项目名称】:" + str(i["项目名称"]) + "\\n" + "【项目地址】:" + str(i["项目地址"]) + "\\n" + "【项目描述】:" + i[
-                "项目描述"][:50] + "\\n\\n"
+            result = "【项目名称】:" + str(i["项目名称"]) + "\\n" + "【项目地址】:" + str(i["项目地址"]) + "\\n" + "【项目描述】:" + i["项目描述"][:50] + "\\n\\n"
         else:
             result = "【项目名称】:" + str(i["项目名称"]) + "\\n" + "【项目地址】:" + str(i["项目地址"]) + "\\n" + "【项目描述】:" + i["项目描述"] + "\\n\\n"
-        message = message + result
+        # 将20条分两次发
         flag = flag + 1
         if flag > 10:
             message1 = message1 + result
+        else:
+            message = message + result
     msg = [message, message1]
     return msg
 
@@ -100,14 +86,9 @@ def push(message, token):
 
 
 if __name__ == '__main__':
-<<<<<<< HEAD
-    keyword = ["CVE-2022", "CVE-2023", "渗透测试", "信息安全", "免杀", "域渗透", "Bypass Antivirus", "Exploit", "Hackone", "钓鱼", "社会工程学",
-               "社工", "提权", "SQL注入", "POC", "蜜罐", "HVV", "白帽", "APT","代码审计",
-=======
     keyword = ["CVE-2022", "CVE-2023", "渗透测试", "信息安全", "免杀", "域渗透", "Bypass Antivirus", "Exploit", "Hackone", "钓鱼",
                "社会工程学",
                "社工", "提权", "SQL注入", "POC", "蜜罐", "HVV", "白帽", "APT", "代码审计",
->>>>>>> 25e477b (修改为每次20条，分两次发)
                "漏洞利用", "红队", "Red Team", "蓝队", "Blue Team", "红蓝对抗", "CTF", "计算机取证", "密码学", "Computer Forensics",
                "应急响应", "Emergency response", "Penetration", "Pentest", "内网渗透", "网络攻防",
                "网络安全", "主机安全", "信息收集", "溯源", "工控安全", "Industrial Control Safety", "云安全", "安全加固", "基线核查", "漏洞挖掘",
